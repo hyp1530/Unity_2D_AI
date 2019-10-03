@@ -5,7 +5,7 @@ public class Fox : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("asdfghj");
+        
     }
 
 }
