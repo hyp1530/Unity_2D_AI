@@ -258,8 +258,8 @@ GameObject:
   - component: {fileID: 947162581}
   - component: {fileID: 947162580}
   - component: {fileID: 947162579}
-  - component: {fileID: 947162583}
   - component: {fileID: 947162582}
+  - component: {fileID: 947162583}
   - component: {fileID: 947162584}
   m_Layer: 0
   m_Name: fox
@@ -372,7 +372,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 5
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 0}
@@ -391,6 +391,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e709cc27e4da3db4b97d1515aee001a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 30
+  jump: 2.5
+  foxName: "\u72D0\u72F8"
+  pass: 0
+  r2D: {fileID: 0}
 --- !u!1 &1128118571
 GameObject:
   m_ObjectHideFlags: 0
