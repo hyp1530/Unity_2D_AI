@@ -6,6 +6,7 @@ public class Fox : MonoBehaviour
     public float jump = 2.5f;
     public string foxName = "狐狸";
     public bool pass = false;
+    public bool isGround;
 
     private Rigidbody2D r2D;
    // private Transform tra;
@@ -17,12 +18,35 @@ public class Fox : MonoBehaviour
     }
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.D)) transform.eulerAngles = new Vector3(0, 0, 0);
-        if (Input.GetKeyDown(KeyCode.A)) transform.eulerAngles = new Vector3(0, 180, 0);
+        if (Input.GetKeyDown(KeyCode.D)) Turn(0);
+        if (Input.GetKeyDown(KeyCode.A)) Turn(180);
     }
     private void FixedUpdate()
-
-    {        
-        r2D.AddForce(new Vector2(speed*Input.GetAxis("Horizontal"), 0));
+    {
+        Walk();
+        Jump();
     }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        isGround = true;
+        Debug.Log("碰到東西" + collision.gameObject);
+    }
+    private void Walk()
+    {
+        r2D.AddForce(new Vector2(speed * Input.GetAxis("Horizontal"), 0));
+    }
+    private void Jump()
+    {
+        if (Input.GetKeyDown(KeyCode.Space)&&isGround==true)
+        {
+            isGround = false;
+            r2D.AddForce(new Vector2(0, jump));
+        }
+        
+    }
+    private void Turn(int direction)
+    {
+        transform.eulerAngles = new Vector3(0, direction, 0);
+    }
+   
 }
