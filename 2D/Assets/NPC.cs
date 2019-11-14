@@ -1,8 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NPC : MonoBehaviour {
+    public enum state
+    {
+        normal,notComplete,complete
+    }
+    public state _state;
+
     [Header("對話")]
     public string SayStart = "嗨!你好，幫我找到十個果實。";
     public string SayNotComplete = "你還沒找到十個果實。";
@@ -13,13 +20,34 @@ public class NPC : MonoBehaviour {
     public bool mission = false;
     public int CountPlayer = 0;
     public int CountFinish = 10;
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    [Header("介面")]
+    public GameObject objCanvas;
+    public Text textSay;
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.name == "fox")
+        {
+            Say();
+
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.name == "fox")
+        {
+            SayClose();
+            
+        }
+
+    }
+    private void Say()
+    {
+        objCanvas.SetActive(true);
+        textSay.text = SayStart;
+    }
+    private void SayClose()
+    {
+
+        objCanvas.SetActive(false);
+    }
 }
