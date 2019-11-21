@@ -236,7 +236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2dcc5e6b3f57b64ab4b07eedaac77d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _state: 0
+  _state: 2
   SayStart: "\u55E8!\u4F60\u597D\uFF0C\u80FD\u5E6B\u6211\u627E\u5230\u5341\u500B\u679C\u5BE6\u55CE?"
   SayNotComplete: "\u4F60\u9084\u6C92\u627E\u5230\u5341\u500B\u679C\u5BE6\u3002"
   SayComplete: "\u611F\u8B1D\u4F60\u5E6B\u52A9\u6211!"

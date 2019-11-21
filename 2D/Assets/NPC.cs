@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class NPC : MonoBehaviour {
+    #region
     public enum state
     {
         normal,notComplete,complete
@@ -23,6 +24,7 @@ public class NPC : MonoBehaviour {
     [Header("介面")]
     public GameObject objCanvas;
     public Text textSay;
+    #endregion
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.name == "fox")
@@ -43,7 +45,19 @@ public class NPC : MonoBehaviour {
     private void Say()
     {
         objCanvas.SetActive(true);
-        textSay.text = SayStart;
+        switch (_state)
+        {
+            case state.normal:
+                textSay.text = SayStart;
+                break;
+            case state.notComplete:
+                textSay.text = SayNotComplete;
+                break;
+            case state.complete:
+                textSay.text = SayComplete;
+                break;       
+        }
+
     }
     private void SayClose()
     {
