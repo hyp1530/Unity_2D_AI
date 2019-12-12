@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class NPC : MonoBehaviour {
+public class NPC : MonoBehaviour
+{
     #region
     public enum state
     {
-        normal,notComplete,complete
+        normal, notComplete, complete
     }
     public state _state;
 
@@ -17,51 +18,76 @@ public class NPC : MonoBehaviour {
     public string SayComplete = "感謝你幫助我!";
     [Header("對話速度")]
     public float speed = 1.5f;
+    public AudioClip soundSay;
+
     [Header("任務相關")]
-    public bool mission = false;
-    public int CountPlayer = 0;
+     public bool complete;
+    public int CountPlayer ;
     public int CountFinish = 10;
+
     [Header("介面")]
     public GameObject objCanvas;
     public Text textSay;
-    #endregion
+
+    private AudioSource aud;
+ #endregion
+    private void Start()
+    {
+        aud = GetComponent<AudioSource>();
+    }
+
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.name == "fox")
-        {
-            Say();
-
-        }
+            Say();        
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.name == "fox")
-        {
             SayClose();
-            
-        }
-
     }
     private void Say()
     {
         objCanvas.SetActive(true);
+        StopAllCoroutines();
+
+        if (countPlayer >= countFinish) _state = state.complete;
+
         switch (_state)
+
         {
             case state.normal:
-                textSay.text = SayStart;
+                StartCoroutine(ShowDialog(SayStart));
+                _state = state.notComplete;
                 break;
             case state.notComplete:
-                textSay.text = SayNotComplete;
+                StartCoroutine(ShowDialog(SayNotComplete));
                 break;
             case state.complete:
-                textSay.text = SayComplete;
-                break;       
+                StartCoroutine(ShowDialog(SayComplete));
+                break;
         }
-
     }
+        private IEnumerator ShowDialog(string say)
+        {
+            textSay.text = "";                              
+
+            for (int i = 0; i < say.Length; i++)      
+            {
+                textSay.text += say[i].ToString();     
+                aud.PlayOneShot(soundSay, 0.6f);
+                yield return new WaitForSeconds(speed);    
+            }
+
+        }
     private void SayClose()
     {
-
+        StopAllCoroutines();
         objCanvas.SetActive(false);
+    }
+    public void PlayerGet()
+    {
+        countPlayer++;
     }
 }

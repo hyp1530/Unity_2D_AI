@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 
 public class Fox : MonoBehaviour
 {
@@ -8,45 +9,55 @@ public class Fox : MonoBehaviour
     public bool pass = false;
     public bool isGround;
 
+    public UnityEvent onEat;
+
     private Rigidbody2D r2D;
-   // private Transform tra;
+    // private Transform tra;
     private void Start()
     {
         r2D = GetComponent<Rigidbody2D>();
-    //    tra = GetComponent<Transform>();
-        
+        //    tra = GetComponent<Transform>();
+
     }
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.D)) Turn(0);
         if (Input.GetKeyDown(KeyCode.A)) Turn(180);
+        Jump();
     }
     private void FixedUpdate()
     {
         Walk();
-        Jump();
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         isGround = true;
-        Debug.Log("碰到東西" + collision.gameObject);
+        // Debug.Log("碰到東西" + collision.gameObject);
     }
-    private void Walk()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        r2D.AddForce(new Vector2(speed * Input.GetAxis("Horizontal"), 0));
-    }
-    private void Jump()
-    {
-        if (Input.GetKeyDown(KeyCode.Space)&&isGround==true)
+        if (collision.tag == "櫻桃")
         {
-            isGround = false;
-            r2D.AddForce(new Vector2(0, jump));
+            Destroy(collision.gameObject);  // 刪除
+            onEat.Invoke();                 // 呼叫事件
         }
-        
+        private void Walk()
+        {
+            r2D.AddForce(new Vector2(speed * Input.GetAxis("Horizontal"), 0));
+        }
+        private void Jump()
+        {
+            if (Input.GetKeyDown(KeyCode.Space) && isGround == true)
+            {
+                isGround = false;
+                r2D.AddForce(new Vector2(0, jump));
+            }
+
+        }
+        private void Turn(int direction)
+        {
+            transform.eulerAngles = new Vector3(0, direction, 0);
+        }
+
     }
-    private void Turn(int direction)
-    {
-        transform.eulerAngles = new Vector3(0, direction, 0);
-    }
-   
 }
