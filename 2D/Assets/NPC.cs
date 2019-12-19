@@ -52,7 +52,7 @@ public class NPC : MonoBehaviour
         objCanvas.SetActive(true);
         StopAllCoroutines();
 
-        if (countPlayer >= countFinish) _state = state.complete;
+        if (CountPlayer >= CountFinish) _state = state.complete;
 
         switch (_state)
 
@@ -88,6 +88,6 @@ public class NPC : MonoBehaviour
     }
     public void PlayerGet()
     {
-        countPlayer++;
+        CountPlayer++;
     }
 }

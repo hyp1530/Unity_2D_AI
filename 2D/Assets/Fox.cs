@@ -1,63 +1,93 @@
-﻿using UnityEngine;
-using UnityEngine.Events;
+﻿using UnityEngine;                  
+using UnityEngine.Events;           
 
-public class Fox : MonoBehaviour
+public class Fox : MonoBehaviour  
 {
-    public int speed = 50;
-    public float jump = 2.5f;
-    public string foxName = "狐狸";
-    public bool pass = false;
+    #region 欄位
+   
+    public int speed = 50;                
+    public float jump = 2.5f;               
+    public string foxName = "fox";         
+    public bool pass = false;              
     public bool isGround;
 
     public UnityEvent onEat;
+    public AudioClip soundProp;
 
-    private Rigidbody2D r2D;
-    // private Transform tra;
+    //private Transform tra;
+    private Rigidbody2D r2d;
+    private AudioSource aud;
+    #endregion
+
+    #region 事件
+   
     private void Start()
     {
-        r2D = GetComponent<Rigidbody2D>();
-        //    tra = GetComponent<Transform>();
-
+        
+        r2d = GetComponent<Rigidbody2D>();
+        aud = GetComponent<AudioSource>();
     }
-    public void Update()
+
+  
+    private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.D)) Turn(0);
+        if (Input.GetKeyDown(KeyCode.D)) Turn();
         if (Input.GetKeyDown(KeyCode.A)) Turn(180);
         Jump();
     }
+
+   
     private void FixedUpdate()
     {
-        Walk();
+        Walk(); 
     }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         isGround = true;
-        // Debug.Log("碰到東西" + collision.gameObject);
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "櫻桃")
         {
-            Destroy(collision.gameObject);  // 刪除
-            onEat.Invoke();                 // 呼叫事件
+            aud.PlayOneShot(soundProp, 1.2f);
+            Destroy(collision.gameObject); 
+            onEat.Invoke();                 
         }
-        private void Walk()
-        {
-            r2D.AddForce(new Vector2(speed * Input.GetAxis("Horizontal"), 0));
-        }
-        private void Jump()
-        {
-            if (Input.GetKeyDown(KeyCode.Space) && isGround == true)
-            {
-                isGround = false;
-                r2D.AddForce(new Vector2(0, jump));
-            }
-
-        }
-        private void Turn(int direction)
-        {
-            transform.eulerAngles = new Vector3(0, direction, 0);
-        }
-
     }
+    #endregion
+
+    #region 方法
+    /// <summary>
+    /// 走路
+    /// </summary>
+    private void Walk()
+    {
+        if (r2d.velocity.magnitude < 10)
+            r2d.AddForce(new Vector2(speed * Input.GetAxisRaw("Horizontal"), 0));
+    }
+
+    /// <summary>
+    /// 跳躍
+    /// </summary>
+    private void Jump()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && isGround == true)
+        {
+            isGround = false;
+            r2d.AddForce(new Vector2(0, jump));
+        }
+    }
+
+
+    
+    /// <summary>
+    /// 轉彎
+    /// </summary>
+    private void Turn(int direction = 0)
+    {
+        transform.eulerAngles = new Vector3(0, direction, 0);
+    }
+    #endregion
 }
