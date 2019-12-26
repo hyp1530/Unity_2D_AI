@@ -4,9 +4,13 @@ using UnityEngine.Events;
 public class Fox : MonoBehaviour  
 {
     #region 欄位
-   
-    public int speed = 50;                
-    public float jump = 2.5f;               
+
+    [Header("血量"), Range(0, 200)]
+    public float hp = 100;
+    [Header("速度"), Range(0, 200)]
+    public int speed = 50;
+    [Header("跳躍"), Range(0, 3000)]
+    public float jump = 3f;               
     public string foxName = "fox";         
     public bool pass = false;              
     public bool isGround;
@@ -90,4 +94,9 @@ public class Fox : MonoBehaviour
         transform.eulerAngles = new Vector3(0, direction, 0);
     }
     #endregion
+    public void Damage(float damage)
+    {
+       hp -= damage;
+
+    }
 }
