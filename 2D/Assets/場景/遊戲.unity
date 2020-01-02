@@ -470,7 +470,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4868606422243338, guid: 9b2107c7b0c546946a64578f94c4f661, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -0.7
+      value: 10.73
       objectReference: {fileID: 0}
     - target: {fileID: 4868606422243338, guid: 9b2107c7b0c546946a64578f94c4f661, type: 2}
       propertyPath: m_LocalPosition.y
@@ -688,7 +688,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.031459093, y: 0.15729523}
+  m_Offset: {x: -0.12159264, y: 0.15729523}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -699,7 +699,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.2704148, y: 1.8187428}
+  m_Size: {x: 2.9313934, y: 1.8187428}
   m_EdgeRadius: 0
 --- !u!114 &224608645
 MonoBehaviour:
@@ -773,7 +773,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4868606422243338, guid: 9b2107c7b0c546946a64578f94c4f661, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 1.95
+      value: 14.3
       objectReference: {fileID: 0}
     - target: {fileID: 4868606422243338, guid: 9b2107c7b0c546946a64578f94c4f661, type: 2}
       propertyPath: m_LocalPosition.y
@@ -952,7 +952,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4868606422243338, guid: 9b2107c7b0c546946a64578f94c4f661, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -10.85
+      value: -13.81
       objectReference: {fileID: 0}
     - target: {fileID: 4868606422243338, guid: 9b2107c7b0c546946a64578f94c4f661, type: 2}
       propertyPath: m_LocalPosition.y
@@ -1078,7 +1078,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4868606422243338, guid: 9b2107c7b0c546946a64578f94c4f661, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -11.84
+      value: -15.85
       objectReference: {fileID: 0}
     - target: {fileID: 4868606422243338, guid: 9b2107c7b0c546946a64578f94c4f661, type: 2}
       propertyPath: m_LocalPosition.y
@@ -2299,7 +2299,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4868606422243338, guid: 9b2107c7b0c546946a64578f94c4f661, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -2.28
+      value: 17.19
       objectReference: {fileID: 0}
     - target: {fileID: 4868606422243338, guid: 9b2107c7b0c546946a64578f94c4f661, type: 2}
       propertyPath: m_LocalPosition.y
