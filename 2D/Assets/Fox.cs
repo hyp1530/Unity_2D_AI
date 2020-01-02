@@ -1,12 +1,10 @@
 ﻿using UnityEngine;                  
-using UnityEngine.Events;           
+using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class Fox : MonoBehaviour  
 {
-    #region 欄位
-
-    [Header("血量"), Range(0, 200)]
-    public float hp = 100;
+  
     [Header("速度"), Range(0, 200)]
     public int speed = 50;
     [Header("跳躍"), Range(0, 3000)]
@@ -21,15 +19,27 @@ public class Fox : MonoBehaviour
     //private Transform tra;
     private Rigidbody2D r2d;
     private AudioSource aud;
-    #endregion
 
-    #region 事件
-   
+
+    [Header("血量"), Range(0, 200)]
+    public float hp = 100;
+
+    public Image hpBar;
+    public GameObject final;
+
+    private float hpMax;
+
+  
+
+
     private void Start()
     {
         
         r2d = GetComponent<Rigidbody2D>();
         aud = GetComponent<AudioSource>();
+        
+
+        hpMax = hp;
     }
 
   
@@ -49,6 +59,7 @@ public class Fox : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         isGround = true;
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -60,7 +71,7 @@ public class Fox : MonoBehaviour
             onEat.Invoke();                 
         }
     }
-    #endregion
+
 
     #region 方法
     /// <summary>
@@ -70,6 +81,7 @@ public class Fox : MonoBehaviour
     {
         if (r2d.velocity.magnitude < 10)
             r2d.AddForce(new Vector2(speed * Input.GetAxisRaw("Horizontal"), 0));
+       
     }
 
     /// <summary>
@@ -81,6 +93,7 @@ public class Fox : MonoBehaviour
         {
             isGround = false;
             r2d.AddForce(new Vector2(0, jump));
+         
         }
     }
 
@@ -97,6 +110,8 @@ public class Fox : MonoBehaviour
     public void Damage(float damage)
     {
        hp -= damage;
+       hpBar.fillAmount = hp / hpMax;
 
+      if (hp <= 0) final.SetActive(true);
     }
 }
